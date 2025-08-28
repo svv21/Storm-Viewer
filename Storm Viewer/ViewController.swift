@@ -6,6 +6,10 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        title = "Storm Viewer"
+        navigationItem.backButtonTitle = "Back"
+        navigationController?.navigationBar.prefersLargeTitles = true
+    
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
         let items = try! fm.contentsOfDirectory(atPath: path)
