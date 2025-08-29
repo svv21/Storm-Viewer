@@ -17,10 +17,9 @@ class ViewController: UITableViewController {
         for item in items {
             if item.hasPrefix("nssl") {
                 pictures.append(item)
+                
             }
         }
-        
-        print(pictures)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,8 +27,8 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for:    indexPath)
-        cell.textLabel?.text = pictures[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
+        cell.textLabel?.text = pictures.sorted()[indexPath.row]
         
         return cell
     }
@@ -38,6 +37,9 @@ class ViewController: UITableViewController {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.selectedImage = pictures[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
+            
+            vc.totalCountOfPictures = pictures.count
+            vc.indexOfSelectedPicture = indexPath.row + 1
         }
     }
 }
